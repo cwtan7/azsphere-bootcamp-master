@@ -1,4 +1,4 @@
-# Azure-Sphere-Bootcamp
+# Azure-Sphere-Bootcamp in ANZ
 
 This repo is built for Azure Sphere Bootcamp Hands-on day. It provides all required information for trainee to follow and finish all hands-on labs. 
 
