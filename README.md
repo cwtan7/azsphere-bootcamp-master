@@ -1,2 +1,2 @@
 # azsphere-bootcamp-master
-Azure Sphere Bootcamp Master Repository for sands-on tutorials and demos.
+Azure Sphere Bootcamp Master Repository for hands-on tutorials and demos.
