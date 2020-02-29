@@ -1,0 +1,28 @@
+#  Copyright (c) Microsoft Corporation. All rights reserved.
+#  Licensed under the MIT License.
+
+CMAKE_MINIMUM_REQUIRED(VERSION 3.8)
+PROJECT(lsm6dso_lps22hh)
+
+set(SRC_FILES
+   ${CMAKE_CURRENT_SOURCE_DIR}/i2cDevice.c
+   ${CMAKE_CURRENT_SOURCE_DIR}/lsm6dso_reg.c
+   ${CMAKE_CURRENT_SOURCE_DIR}/lps22hh_reg.c
+)
+
+set(H_FILES
+   ${H_FILES}
+   ${CMAKE_CURRENT_SOURCE_DIR}/i2cDevice.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/lsm6dso_reg.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/lps22hh_reg.h
+)
+
+list(APPEND INCLUDE_DIRS ${CMAKE_INCLUDE_PATH} $(H_FILES))
+
+set(CMAKE_INCLUDE_PATH /usr/local/lib PUBLIC ${AZURE_SPHERE_API_SET_DIR}/usr/include/azureiot ${PROJECT_BINARY_DIR} $(PROJECT_SOURCE_DIR))
+
+add_library(${PROJECT_NAME} ${SRC_FILES})
+
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/drv/lsm6dso_lps22hh PUBLIC ${AZURE_SPHERE_API_SET_DIR}/usr/include/azureiot ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")

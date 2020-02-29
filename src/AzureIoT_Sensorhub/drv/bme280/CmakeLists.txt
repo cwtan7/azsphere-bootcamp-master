@@ -1,0 +1,16 @@
+PROJECT(bme280)
+
+set(SRC_FILES
+   ${CMAKE_CURRENT_SOURCE_DIR}/bme280.c
+   ${CMAKE_CURRENT_SOURCE_DIR}/bme280_user.c
+)
+
+#set(H_FILES
+#   ${H_FILES}
+#   ${CMAKE_CURRENT_SOURCE_DIR}/bme280.h
+#   ${CMAKE_CURRENT_SOURCE_DIR}/bme280_defs.h
+#   ${CMAKE_CURRENT_SOURCE_DIR}/bme280_user.h
+#)
+
+add_library(${PROJECT_NAME} ${SRC_FILES})
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
