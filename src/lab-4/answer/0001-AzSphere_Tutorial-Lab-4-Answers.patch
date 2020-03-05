@@ -1,4 +1,4 @@
-From cdeee0e3c011a53352bd8b08e65a62326053f27b Mon Sep 17 00:00:00 2001
+From e7a762a855339574c5acc7bdbc7c1e334a3ff3ba Mon Sep 17 00:00:00 2001
 From: "Chee Weng, TAN" <cheeweng.tan@microsoft.com>
 Date: Mon, 2 Mar 2020 11:12:11 +1300
 Subject: [PATCH] [AzSphere_Tutorial] Lab-4 Answers
@@ -50,7 +50,7 @@ index f05a2e9..08dbc40 100644
      }
    ],
 diff --git a/Samples/AzureIoT/app_manifest.json b/Samples/AzureIoT/app_manifest.json
-index bd787a8..cd799cb 100644
+index bd787a8..97f9149 100644
 --- a/Samples/AzureIoT/app_manifest.json
 +++ b/Samples/AzureIoT/app_manifest.json
 @@ -3,11 +3,13 @@
@@ -58,10 +58,10 @@ index bd787a8..cd799cb 100644
    "ComponentId": "819255ff-8640-41fd-aea7-f85d34c491d5",
    "EntryPoint": "/bin/app",
 -  "CmdArgs": [],
-+  "CmdArgs": [ "0ne000CD801" ],
++  "CmdArgs": [ "0ne000CC88E" ],
    "Capabilities": {
 -    "AllowedConnections": [ "global.azure-devices-provisioning.net" ],
-+    "AllowedConnections": [ "global.azure-devices-provisioning.net", "AzSphere-BootCamp-IoTHub.azure-devices.net" ],
++    "AllowedConnections": [ "global.azure-devices-provisioning.net", "iotc-72813928-59b1-41fc-8030-78412ccbb456.azure-devices.net" ],
      "Gpio": [ "$SAMPLE_BUTTON_1", "$SAMPLE_BUTTON_2", "$SAMPLE_LED" ],
 -    "DeviceAuthentication": "00000000-0000-0000-0000-000000000000"
 +    "DeviceAuthentication": "2c4ca00f-a355-4317-b152-6d388998ac36",
@@ -74,7 +74,7 @@ index bd787a8..cd799cb 100644
 +
 diff --git a/Samples/AzureIoT/i2cDevice.c b/Samples/AzureIoT/i2cDevice.c
 new file mode 100644
-index 0000000..c4679b8
+index 0000000..a668a2c
 --- /dev/null
 +++ b/Samples/AzureIoT/i2cDevice.c
 @@ -0,0 +1,669 @@
@@ -138,7 +138,7 @@ index 0000000..c4679b8
 +#include <azure_sphere_provisioning.h>
 +
 +#define IOT_CENTRAL_APPLICATION
-+#define JSON_BUFFER_SIZE 128
++#define JSON_BUFFER_SIZE 256
 +
 +/* Private variables ---------------------------------------------------------*/
 +static axis3bit16_t data_raw_acceleration;
@@ -314,8 +314,8 @@ index 0000000..c4679b8
 +		// We've seen that the first read of the Accelerometer data is garbage.  If this is the first pass
 +		// reading data, don't report it to Azure.  Since we're graphing data in Azure, this data point
 +		// will skew the data.
-+		if (!firstPass) {
-+
++		if (!firstPass) 
++		{
 +			// Allocate memory for a telemetry message to Azure
 +			char *pjsonBuffer = (char *)malloc(JSON_BUFFER_SIZE);
 +			if (pjsonBuffer == NULL) {
@@ -323,8 +323,8 @@ index 0000000..c4679b8
 +			}
 +
 +			// construct the telemetry message
-+			snprintf(pjsonBuffer, JSON_BUFFER_SIZE, "{\"gX\":\"%.4lf\", \"gY\":\"%.4lf\", \"gZ\":\"%.4lf\", \"pressure\": \"%.2f\", \"aX\": \"%4.2f\", \"aY\": \"%4.2f\", \"aZ\": \"%4.2f\"}",
-+				acceleration_mg[0], acceleration_mg[1], acceleration_mg[2], pressure_hPa, angular_rate_dps[0], angular_rate_dps[1], angular_rate_dps[2]);
++			snprintf(pjsonBuffer, JSON_BUFFER_SIZE, "{\"aX\":\"%.4lf\", \"aY\":\"%.4lf\", \"aZ\":\"%.4lf\", \"pressure\": \"%.2f\", \"gX\": \"%4.2f\", \"gY\": \"%4.2f\", \"gZ\": \"%4.2f\", \"Temperature\": \"%.2f\"}",
++				acceleration_mg[0], acceleration_mg[1], acceleration_mg[2], pressure_hPa, angular_rate_dps[0], angular_rate_dps[1], angular_rate_dps[2], lps22hhTemperature_degC);
 +
 +			Log_Debug("\n[Info] Sending telemetry: %s\n", pjsonBuffer);
 +			sendMessage(pjsonBuffer);
@@ -14944,7 +14944,7 @@ index f2a23b4..a8e17d9 100644
      }
  
 +#if !defined (SIM_TEMP_SENSORDATA)
-+    // Initialize LSM6DSO + LPS22HH Sensor
++    // Initialize BME280 Sensor
 +    Log_Debug("Initializing LSM6DSO + LPS22HH\n");
 +    sensorStatus = initI2cDevice();
 +    if (sensorStatus == ExitCode_Success) {
@@ -14975,5 +14975,5 @@ index f2a23b4..a8e17d9 100644
  /// <summary>
  ///     Check whether a given button has just been pressed.
 -- 
-2.21.0
+2.17.1.windows.2
 

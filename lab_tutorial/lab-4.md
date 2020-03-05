@@ -80,13 +80,13 @@
 		1. Iniitializing the Sensor Hub at during peripheral initializatoin
 		2. Replacing the Send Simulated data with the real Sensor Hub send data API call.
 				
-			> **HINT:** `initI2cDevice()` and  `SensorHub_SendData()` The Avnet SensorHub (LSM6DSO and LPS22HH) source files can be found in "src/lab-4/sensorhub_lsm6ds0_lps22hh"
+			> **HINT:** `initI2cDevice()` and  `SensorHub_SendData()` The Avnet SensorHub (LSM6DSO and LPS22HH) source files can be found in *"/src/lab-4/sensorhub_lsm6ds0_lps22hh"*
 		
-		**NOTE:** Alternatively, you can also apply the patch *0001-AzSphere_Tutorial-Lab-4-Answers.patch* which can be found in "src/lab-4/answer" and study the code changes directly.  Please use the following git command to apply a patch
+		**NOTE:** Alternatively, you can also apply the patch *0001-AzSphere_Tutorial-Lab-4-Answers.patch* which can be found inside the folder *"/src/lab-4/answer"* and study the code changes directly.  Please use the following git command to apply a patch
 		
-		`git apply <patch_file>`
+			`git apply <patch_file>`
 
-		**IMPORTANT:** Before applying the patch, please backup your modified app_manifest.json as it will overwrite the valid value of your *Tenant ID, Scope ID and IoT Hub URL!*	
+		**IMPORTANT:** Before applying the patch, please backup your modified app_manifest.json as it will overwrite the valid value of your ** *Tenant ID, Scope ID and IoT Hub URL!*	**
 
 12. After finishing all the configuration and code changes, select **GDB Debugger (HLCore)** and Press F5 to build and run the applicaiton. Go to the device dashboard to check your data.
 
