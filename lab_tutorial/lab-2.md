@@ -1,6 +1,6 @@
 # Lab-2: Application Over-the-Air deployment
 
-- Go to [Home Page](README.md)
+- Go to [Home Page](../README.md)
 
 ## Goals
 

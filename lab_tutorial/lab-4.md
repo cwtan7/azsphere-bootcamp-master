@@ -1,6 +1,6 @@
 # Lab-4: Visualize real world data on Azure IoT Central
 
-- Go to [Home Page](README.md)
+- Go to [Home Page](../README.md)
 
 ## Goals
 

@@ -1,6 +1,6 @@
 # Lab-3: Connect to Azure IoT Hub
 
-- Go to [Home Page](README.md)
+- Go to [Home Page](../README.md)
 
 ## Goals
 

@@ -1,6 +1,6 @@
 # Lab-1: Blinking LED
 
-- Go to [Home Page](README.md)
+- Go to [Home Page](../README.md)
 
 ## Goals
 
