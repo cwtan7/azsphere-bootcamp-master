@@ -58,7 +58,7 @@
 #include <azure_sphere_provisioning.h>
 
 #define IOT_CENTRAL_APPLICATION
-#define JSON_BUFFER_SIZE 128
+#define JSON_BUFFER_SIZE 256
 
 /* Private variables ---------------------------------------------------------*/
 static axis3bit16_t data_raw_acceleration;
@@ -234,8 +234,8 @@ void SensorHub_SendData(void)
 		// We've seen that the first read of the Accelerometer data is garbage.  If this is the first pass
 		// reading data, don't report it to Azure.  Since we're graphing data in Azure, this data point
 		// will skew the data.
-		if (!firstPass) {
-
+		if (!firstPass) 
+		{
 			// Allocate memory for a telemetry message to Azure
 			char *pjsonBuffer = (char *)malloc(JSON_BUFFER_SIZE);
 			if (pjsonBuffer == NULL) {
@@ -243,8 +243,8 @@ void SensorHub_SendData(void)
 			}
 
 			// construct the telemetry message
-			snprintf(pjsonBuffer, JSON_BUFFER_SIZE, "{\"gX\":\"%.4lf\", \"gY\":\"%.4lf\", \"gZ\":\"%.4lf\", \"pressure\": \"%.2f\", \"aX\": \"%4.2f\", \"aY\": \"%4.2f\", \"aZ\": \"%4.2f\"}",
-				acceleration_mg[0], acceleration_mg[1], acceleration_mg[2], pressure_hPa, angular_rate_dps[0], angular_rate_dps[1], angular_rate_dps[2]);
+			snprintf(pjsonBuffer, JSON_BUFFER_SIZE, "{\"aX\":\"%.4lf\", \"aY\":\"%.4lf\", \"aZ\":\"%.4lf\", \"pressure\": \"%.2f\", \"gX\": \"%4.2f\", \"gY\": \"%4.2f\", \"gZ\": \"%4.2f\", \"Temperature\": \"%.2f\"}",
+				acceleration_mg[0], acceleration_mg[1], acceleration_mg[2], pressure_hPa, angular_rate_dps[0], angular_rate_dps[1], angular_rate_dps[2], lps22hhTemperature_degC);
 
 			Log_Debug("\n[Info] Sending telemetry: %s\n", pjsonBuffer);
 			sendMessage(pjsonBuffer);
